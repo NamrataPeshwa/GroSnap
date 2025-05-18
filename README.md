@@ -18,12 +18,11 @@ GroSnap is a web-based platform that empowers users to digitally order groceries
 
 | Component     | Technology                          |
 |--------------|--------------------------------------|
-| Frontend      | React.js / HTML5 (planned)          |
-| Backend       | FastAPI (Python)                    |
+| Frontend      | HTML5, CSS, JS                      |
+| Backend       | Flaskapi (Python)                   |
 | OCR Engine    | Tesseract OCR + pytesseract         |
 | Image Handling| Pillow                              |
 | WhatsApp API  | WhatsApp Cloud API / wa.me link     |
-| Location      | Browser Geolocation + Haversine     |
 
 ---
 
@@ -32,7 +31,7 @@ GroSnap is a web-based platform that empowers users to digitally order groceries
 1. **Upload** a grocery list photo.
 2. **OCR** extracts item names from the image.
 3. User location is fetched via the browser.
-4. Backend matches items against nearby store inventories.
+4. Backend matches items against nearby registered Kirana stores.
 5. Best-fit store is shown (e.g., “Ravi Kirana has 7 of 10 items”).
 6. On checkout:
    - A summary is generated.
