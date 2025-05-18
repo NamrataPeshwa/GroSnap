@@ -1,0 +1,102 @@
+{% block content %}
+
+<style>
+  .welcome-container {
+  background: url(static/images/welcome.jpeg) no-repeat center center;
+  background-size: cover;
+  padding: 100px 20px;
+  text-align: center;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+  .welcome-container h2 {
+    font-size: 56px;
+    color: #333;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
+  .welcome-container p {
+    font-size: 25px;
+    color: #555;
+    margin-bottom: 40px;
+  }
+
+  .welcome-text {
+  background-color: rgba(245, 222, 179, 0.7); /* light beige with transparency */
+  padding: 30px;
+  border-radius: 16px;
+  display: inline-block;
+  margin: 0 auto 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+  .signup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .signup-buttons a {
+    text-decoration: none;
+  }
+
+  .signup-buttons button {
+    background-color: #E50046;
+    color: white;
+    padding: 14px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .signup-buttons button:hover {
+    background-color: #c4003a;
+    transform: scale(1.05);
+  }
+</style>
+
+<div class="welcome-container">
+    <div class="welcome-text">
+  <h2>Welcome to GroSnap</h2>
+  <p>Choose how you'd like to get started:</p>
+</div>
+  <div class="signup-buttons">
+    <a href="{{ url_for('main.customer_register') }}">
+      <button>Sign Up as Customer</button>
+    </a>
+    <a href="{{ url_for('main.shopkeeper_register') }}">
+      <button href="{{ url_for('main.shopkeeper_register') }}">Sign Up as Shopkeeper</button>
+    </a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer style="background-color: #1d1d1d; color: #fff; padding: 40px 20px; text-align: center; margin-top: 60px;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 style="font-size: 24px; margin-bottom: 20px;">GroSnap</h2>
+    <p style="font-size: 14px; color: #ccc;">Your smart grocery assistant — bringing simplicity to your shopping.</p>
+    
+    <div style="margin: 20px 0;">
+      <a href="#" style="margin: 0 10px; color: #fff;"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" style="margin: 0 10px; color: #fff;"><i class="fab fa-instagram"></i></a>
+      <a href="#" style="margin: 0 10px; color: #fff;"><i class="fab fa-twitter"></i></a>
+      <a href="#" style="margin: 0 10px; color: #fff;"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+
+    <div style="font-size: 13px; color: #aaa;">
+      &copy; 2025 GroSnap. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+{% endblock %}

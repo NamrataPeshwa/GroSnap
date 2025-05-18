@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>🗺️ Nearby Kirana Shops</h2>
+
+<div id="map" style="height: 500px; width: 100%; margin-top: 20px;"></div>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    
+    const map = L.map('map').setView([12.2958, 76.6394], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Geolocate user and fetch nearby shops
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+
+            map.setView([userLat, userLng], 14);
+
+            L.marker([userLat, userLng])
+              .addTo(map)
+              .bindPopup("📍 You are here")
+              .openPopup();
+
+            // Fetch nearby shops
+            fetch('/api/nearby_shops', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ lat: userLat, lng: userLng })
+            })
+            .then(response => response.json())
+            .then(data => {
+                data.shops.forEach(shop => {
+                    L.marker([shop.latitude, shop.longitude])
+                        .addTo(map)
+                        .bindPopup(`
+                    <b>${shop.name}</b><br>
+                    ${shop.address}<br>
+                    <a href="/shop/${shop.id}">View Shop 🛍️</a>
+                    `);
+
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching nearby shops:', error);
+            });
+
+        }, function(error) {
+            alert("Unable to retrieve your location.");
+        });
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+
+</script>
+{% endblock %}

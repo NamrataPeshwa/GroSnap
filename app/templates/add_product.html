@@ -1,0 +1,241 @@
+{% block content %}
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #e1f4c9, #d3ecf3);
+      color: #333;
+      padding-bottom: 100px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 220px;
+      background-color: #C7DB9C;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-name {
+      font-size: 30px;
+      font-weight: bold;
+      color: #1d1d1d;
+      padding-left: 10px;
+    }
+
+    .topbar img.logo {
+      height: 80px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: #1d1d1d;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 10px 12px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #E50046;
+      background-color: rgba(229, 0, 70, 0.1);
+      border-radius: 6px;
+    }
+
+    .user-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #FFF0BD;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      min-width: 160px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      padding: 8px 0;
+      font-size: 20px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: #1d1d1d;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #FDAB9E;
+    }
+
+    .user-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #1d1d1d;
+    }
+
+    .add-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      background-color: #E50046;
+      color: white;
+      padding: 10px 18px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .add-btn:hover {
+      background-color: #b30035;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0,0,0,0.08);
+    }
+
+    th, td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      background-color: #FFF0BD;
+      font-weight: bold;
+    }
+
+    td:last-child {
+      white-space: nowrap;
+    }
+
+    .action-links a {
+      margin-right: 10px;
+      color: #007BFF;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .action-links a:hover {
+      text-decoration: underline;
+    }
+
+    .delete-form {
+      display: inline;
+    }
+
+    .delete-form button {
+      background: none;
+      border: none;
+      color: red;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #1d1d1d;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+  
+<div class="container">
+  <h2>➕ Add New Product</h2>
+  <form method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+    <div>
+      <label>Name:</label><br>
+      <input type="text" name="name" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+    </div>
+
+    <div>
+      <label>Quantity:</label><br>
+      <input type="text" step="0.01" name="quantity" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+    </div>
+
+    <div>
+      <label>Price:</label><br>
+      <input type="number" step="0.01" name="price" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+    </div>
+
+    <div>
+      <label>Category:</label><br>
+      <select name="category" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+        <option>Atta, rice & grains</option>
+        <option>Dals & pulses</option>
+        <option>Oil & ghee</option>
+        <option>Masala, sugar & spices</option>
+        <option>Cereals & dry fruits</option>
+        <option>Tea, coffee & drink mixes</option>
+        <option>Juices & cold drinks</option>
+        <option>Sauces & spreads</option>
+        <option>Noodles & pasta</option>
+        <option>Snacks & biscuits</option>
+        <option>Chocolates & sweets</option>
+        <option>Supersavers</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Stock:</label><br>
+      <input type="number" name="stock" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+    </div>
+
+    <div>
+      <label>Image URL:</label><br>
+      <input type="url" name="image_url" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+    </div>
+
+    <button type="submit" style="margin-top: 10px; padding: 12px 20px; background-color: #E50046; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+      Add Product
+    </button>
+  </form>
+
+  <a href="{{ url_for('main.manage_products') }}" class="back-link">← Back to Products</a>
+</div>
+{% endblock %}

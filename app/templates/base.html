@@ -1,0 +1,403 @@
+{% block content %}
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #C7DB9C;
+      color: #333;
+    }
+
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 220px;
+      background-color: #C7DB9C;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-name {
+      font-size: 30px;
+      font-weight: bold;
+      color: #1d1d1d;
+      padding-left: 10px;
+    }
+
+    .topbar img.logo {
+      height: 80px;
+    }
+
+    .nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #1d1d1d;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 10px 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+  color: #E50046;
+  background-color: rgba(229, 0, 70, 0.1);
+  border-radius: 6px;
+}
+
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* directly below the icon */
+  right: 0;
+  background-color: #FFF0BD;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  padding: 8px 0;
+  font-size: 20px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  color: #1d1d1d;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #FDAB9E;
+}
+
+/* Show dropdown on hover */
+.user-dropdown:hover .dropdown-menu {
+  display: block;
+}
+    
+
+    .hero {
+      background-color: #C7DB9C;
+      text-align: center;
+      padding: 80px 20px 100px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 500px;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      font-size: 14px;
+      border-radius: 10px;
+      border: 1.5px solid #222;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: -60px auto 60px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background-color: #FFF0BD;
+      border-radius: 25px;
+      padding: 25px 20px 60px;
+      color: black;
+      width: 450px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: gray;
+      margin-bottom: 10px;
+    }
+
+    .card .offer {
+      background: #FDAB9E;
+      color: white;
+      font-weight: 700;
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    .card .arrow {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #E50046;
+      color: white;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 30px;
+    }
+
+    .category-card {
+      background-color: #ffeeff; /* light pinkish background */
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .category-card:hover {
+      transform: scale(1.05);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .category-card p {
+      font-weight: 600;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .category-card img {
+        height: 80px;
+      }
+    }
+    
+  </style>
+      <!-- Topbar -->
+<div class="topbar">
+  <div class="brand">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" style="width:40px;" class="rounded-pill">
+    <h1 class="brand-name">GroSnap</h1>
+  </div>
+  <div class="nav-menu">
+            <a href="#">Home</a> 
+            <a href="{{ url_for('main.shop_list') }}">Browse Shops</a> 
+            <a href="{{ url_for('main.view_cart') }}">Cart 🛒</a>
+            <a href="#">Orders</a> 
+    <div class="user-dropdown">
+  <a href="#" class="nav-link">
+    <i class="fa-solid fa-circle-user"></i>
+  </a>
+  <div class="dropdown-menu">
+    <a href="#">Settings</a>
+    <a href="{{ url_for('main.customer_login') }}">Log Out</a>
+  </div>
+</div>
+  </div>
+</div>
+
+
+  <!-- Main Content to Blur -->
+  <div id="mainContent">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>The Future of Grocery, Rooted in Your Neighborhood.</h1>
+      <div class="search-bar">
+        <div class="input-wrapper">
+          <input type="text" id="searchInput" placeholder="Search for item or more" />
+          <button type="submit"><a href="{{ url_for('main.product_search') }}">Search</a></button>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+<div class="cards">
+  <div class="card">
+    <h2>Upload List</h2>
+    <p>Snap/upload your grocery list. Our app converts it to text using smart OCR.</p>
+    <div class="offer">No Typing Needed!</div>
+    <img src="{{ url_for('static', filename='images/scan.jpeg') }}" alt="OCR Upload">
+    <div class="arrow">→</div>
+  </div>
+  <div class="card">
+    <h2>Smart Dashboard</h2>
+    <p>Track your weekly/monthly spending and get itemized summaries.</p>
+    <div class="offer">Know Where You Spend</div>
+    <img src="{{ url_for('static', filename='images/ai.jpeg') }}" alt="Spending Dashboard">
+    <div class="arrow">→</div>
+  </div>
+
+
+  </div>
+
+ <!-- PLACE RECENTLY PURCHASED HERE  -->
+
+
+  <!-- Arrows -->
+  <button onclick="scrollDeals(-1)" style="position: absolute; left: 10px; top: 100px; z-index: 1; background: white; border-radius: 50%; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 40px; height: 40px; cursor: pointer;">
+    &#10094;
+  </button>
+  <button onclick="scrollDeals(1)" style="position: absolute; right: 10px; top: 100px; z-index: 1; background: white; border-radius: 50%; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 40px; height: 40px; cursor: pointer;">
+    &#10095;
+  </button>
+
+  <!-- Scrollable Container -->
+  <div id="dealsContainer" style="display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px;">
+  </div>
+</div>
+{% endblock %}
+ <script>
+
+  
+  function redirectToHomepage() {
+    const role = document.querySelector('select').value;
+
+    if (!role) {
+      alert("Please select a role.");
+      return;
+    }
+
+    if (role === "consumer") {
+      window.location.href = "consumer_homepage.html";
+    } else if (role === "store-owner") {
+      window.location.href = "store_owner_dashboard.html";
+    }
+  }
+
+  function openSignupModal() {
+    document.getElementById("signinModal").style.display = "flex";
+    document.getElementById("mainContent").classList.add("blur");
+  }
+
+  function closeSignupModal() {
+    document.getElementById("signinModal").style.display = "none";
+    document.getElementById("mainContent").classList.remove("blur");
+  }
+
+  function openLoginModal() {
+    document.getElementById("loginModal").style.display = "flex";
+    document.getElementById("mainContent").classList.add("blur");
+  }
+
+  function closeLoginModal() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("mainContent").classList.remove("blur");
+  }
+
+  function switchToLogin() {
+    document.getElementById("signinModal").style.display = "none";
+    document.getElementById("loginModal").style.display = "flex";
+  }
+
+  function switchToSignup() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("signinModal").style.display = "flex";
+  }
+
+
+  // ✅ Make sure DOM is ready
+  window.onload = function () {
+    const placeholders = [
+      "Search for Atta",
+      "Search for Bread",
+      "Search for Milk",
+      "Search for Rice",
+      "Search for Fruits",
+      "Search for Vegetables"
+    ];
+
+    let index = 0;
+    const searchInput = document.getElementById("searchInput");
+
+    setInterval(() => {
+      index = (index + 1) % placeholders.length;
+      searchInput.placeholder = placeholders[index];
+    },3000);
+  };
+</script>
+  
+
+
+
+
+  
+
+
+   

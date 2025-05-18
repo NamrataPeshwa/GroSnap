@@ -1,0 +1,223 @@
+{% block content %}
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        h2 {
+            color: #2f855a;
+            margin-bottom: 20px;
+        }
+
+        .shop {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #38a169;
+            background-color: #f0fff4;
+            border-radius: 8px;
+        }
+
+        .shop h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #22543d;
+        }
+
+        .shop p {
+            margin: 5px 0;
+            color: #4a5568;
+        }
+
+        .no-shops {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+
+  .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      margin-top: 15px;
+      padding-bottom: 30px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 220px;
+    background-color: #C7DB9C;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand-name {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1d1d1d;
+    padding-left: 10px;
+  }
+
+  .topbar img.logo {
+    height: 80px;
+  }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-link {
+    color: #1d1d1d;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 12px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #E50046;
+    background-color: rgba(229, 0, 70, 0.1);
+    border-radius: 6px;
+  }
+
+  .product-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+  }
+
+  .product-card:hover {
+      transform: translateY(-4px);
+  }
+
+  .product-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: contain;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+  }
+
+  .product-card h4 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+  }
+
+  .product-card p {
+      font-weight: bold;
+      color: #2e7d32;
+      margin: 0 0 8px;
+  }
+
+  .product-card a {
+      display: inline-block;
+      background: #5c2d91;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+  }
+
+  .product-card a:hover {
+      background-color: #4a2479;
+  }
+</style>
+    
+<!-- Topbar -->
+<div class="topbar">
+  <div class="brand">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Logo" style="width:40px;" class="rounded-pill">
+    <h1 class="brand-name">GroSnap</h1>
+  </div>
+  <div class="nav-menu">
+    <a href="#" class="nav-link">Home</a>
+    <a href="{{ url_for('main.shop_list') }}" class="nav-link">Browse Shops</a>
+    <a href="{{ url_for('main.view_cart') }}" class="nav-link">Cart 🛒</a>
+    <a href="#" class="nav-link">Orders</a>
+    <div class="user-dropdown">
+      <a href="#" class="nav-link">
+        <i class="fa-solid fa-circle-user"></i>
+      </a>
+      <div class="dropdown-menu">
+        <a href="#">Settings</a>
+        <a href="{{ url_for('main.customer_login') }}">Log Out</a>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="container">
+        <h2>Nearby Verified Kirana Shops</h2>
+        <div id="shopList">
+            <p>Loading nearby shops...</p>
+        </div>
+    </div>
+
+    <script>
+        function fetchNearbyShops() {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                fetch('/nearby-shops', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ latitude: lat, longitude: lng })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const shopList = document.getElementById('shopList');
+                    shopList.innerHTML = '';
+
+                    if (data.length === 0) {
+                        shopList.innerHTML = '<p class="no-shops">No nearby verified shops found.</p>';
+                        return;
+                    }
+
+                    data.forEach(shop => {
+                        const div = document.createElement('div');
+                        div.className = 'shop';
+                        div.innerHTML = `
+                            <h4>${shop.name}</h4>
+                            <p><strong>Rating:</strong> ${shop.rating || 'N/A'}</p>
+                            <p><strong>Address:</strong> ${shop.vicinity}</p>
+                        `;
+                        shopList.appendChild(div);
+                    });
+                })
+                .catch(err => {
+                    document.getElementById('shopList').innerHTML = '<p class="no-shops">Error fetching shops.</p>';
+                    console.error('Error:', err);
+                });
+            }, function (err) {
+                document.getElementById('shopList').innerHTML = '<p class="no-shops">Please allow location access to see nearby shops.</p>';
+            });
+        }
+
+        fetchNearbyShops();
+    </script>
+
