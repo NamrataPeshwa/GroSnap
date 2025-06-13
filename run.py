@@ -6,8 +6,6 @@ from PIL import Image
 import os
 
 app = create_app()
-
-app = Flask(__name__)
 CORS(app)
 
 # Route to render the OCR Upload HTML page

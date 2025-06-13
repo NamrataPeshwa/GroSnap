@@ -5,6 +5,12 @@ from config import Config
 from dotenv import load_dotenv
 import os
 
+# ✅ Add this to replace MySQLdb with pymysql
+import pymysql
+pymysql.install_as_MySQLdb()
+
+# Load environment variables (if needed)
+load_dotenv()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -30,5 +36,3 @@ def create_app():
         return Shopkeeper.query.get(int(user_id))
 
     return app
-
-    
