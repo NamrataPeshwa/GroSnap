@@ -1,4 +1,17 @@
-# 🛒 GroSnap – Digitize Your Local Kirana Stores
+# <h1 align="center">🛒 GroSnap – Digitize Your Local Kirana Stores</h1>
+
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&pause=1000&color=4CAF50&center=true&vCenter=true&width=600&lines=Snap+your+grocery+list+📝;Match+with+nearby+Kirana+stores+📍;Order+instantly+via+WhatsApp+📲" alt="GroSnap Typing Animation" />
+</p>
+
+<p align="center"><i>If the animation above doesn't load, here's what GroSnap does:</i></p>
+
+<h4 align="center">📸 Snap. 📍 Match. 📲 Order. — All from your local Kirana store.</h4>
+
+<p align="center">
+  A smart grocery ordering platform blending <b>AI</b>, <b>geolocation</b>, and <b>WhatsApp</b> to simplify your local shopping.
+</p>
 
 ## 🚀 Project Overview
 
