@@ -1,91 +1,91 @@
 # 🛒 GroSnap – Digitize Your Local Kirana Stores
 
-GroSnap is a web-based platform that empowers users to digitally order groceries from their nearby Kirana stores using smart features like **Snap-to-Order (OCR)** and **WhatsApp list sharing**. It bridges the gap between **digital convenience** and **local trust**.
+## 🚀 Project Overview
+
+**GroSnap** is a smart grocery ordering platform that connects consumers with local Kirana stores through a seamless digital experience. Upload a photo of your handwritten or printed grocery list, and GroSnap uses **OCR** to extract items, finds the nearest Kirana stores matching your list, and sends the order via **WhatsApp** for easy confirmation.
+
+This solution leverages modern web technologies to empower local vendors while making grocery shopping **fast**, **contactless**, and **convenient**.
+
+---
+
+## 🧰 Tech Stack
+
+| Layer          | Technology                |
+| -------------- | -------------------------|
+| **Frontend**   | React + Vite             |
+| **Styling**    | Tailwind CSS             |
+| **Backend**    | Python + Flask           |
+| **OCR Engine** | Tesseract OCR (pytesseract) |
+| **Messaging API** | WhatsApp Cloud API     |
+| **Database**   | Firebase Firestore       |
+| **Location**   | Browser Geolocation API  |
 
 ---
 
 ## 📸 Key Features
 
-- **Snap-to-Order**: Upload an image of a handwritten or typed grocery list. The app uses **OCR** to extract items and build a digital cart.
-- **Nearest Store Matching**: Based on the user's location, GroSnap finds the **nearest Kirana store** with the **highest item match**.
-- **WhatsApp API Integration**: Automatically sends the finalized grocery list to the Kirana store via WhatsApp, enabling human confirmation.
-- **Pay on Delivery**: No pre-payment required — customers pay via UPI or cash when the groceries arrive.
-- **Item Availability Feedback**: Displays which items from your list are available at the selected store (e.g., "7 out of 10 items available").
+- **Snap-to-Order:** Extract items from handwritten/printed grocery lists using OCR.
+- **Nearest Store Matching:** Locate Kirana stores nearby with the highest match of your grocery list.
+- **WhatsApp Ordering:** Send your order directly to the store via WhatsApp for quick confirmation.
+- **Pay on Delivery:** Flexible payment options with UPI or cash on delivery.
+- **Real-time Availability:** See which items are available at the selected store.
 
 ---
 
-## 🧠 Tech Stack
+## ⚙️ Getting Started
 
-| Component     | Technology                          |
-|--------------|--------------------------------------|
-| Frontend      | HTML5, CSS, JS                      |
-| Backend       | Flaskapi (Python)                   |
-| OCR Engine    | Tesseract OCR + pytesseract         |
-| Image Handling| Pillow                              |
-| WhatsApp API  | WhatsApp Cloud API / wa.me link     |
+1. **Clone the repository**
+
+    ```bash
+    git clone https://github.com/your-username/grosnap.git
+    cd grosnap
+    ```
+
+2. **Install Backend Dependencies**
+
+    ```bash
+    cd backend
+    pip install -r requirements.txt
+    ```
+
+3. **Install Frontend Dependencies**
+
+    ```bash
+    cd ../frontend
+    npm install
+    ```
+
+4. **Run Backend Server**
+
+    ```bash
+    cd ../backend
+    python app.py
+    ```
+
+5. **Run Frontend Server**
+
+    ```bash
+    cd ../frontend
+    npm run dev
+    ```
+
+6. **Open your browser at**
+
+    ```
+    http://localhost:3000
+    ```
 
 ---
 
-## 🛠 How It Works
+## 🔗 Useful Links
 
-1. **Upload** a grocery list photo.
-2. **OCR** extracts item names from the image.
-3. User location is fetched via the browser.
-4. Backend matches items against nearby registered Kirana stores.
-5. Best-fit store is shown (e.g., “Ravi Kirana has 7 of 10 items”).
-6. On checkout:
-   - A summary is generated.
-   - A WhatsApp message is prefilled and sent to the store.
-   - User is shown the store phone number and advised to pay on delivery.
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract)
+- [WhatsApp Cloud API](https://developers.facebook.com/docs/whatsapp)
+- [Firebase Firestore](https://firebase.google.com/docs/firestore)
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ---
 
-## 🚀 Getting Started (Local Setup)
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/grosnap.git
-   cd grosnap
-# 🚀 GroSnap – The Future of Kirana Shopping
-
-**Revolutionizing local grocery shopping with AI-powered convenience while preserving the human touch of neighborhood stores**
-
-## 🌟 Why GroSnap?
-
-| Traditional Shopping | GroSnap Advantage |
-|----------------------|-------------------|
-| Manual list writing | 📸 Snap-to-Order OCR |
-| Calling/visiting stores | 📱 Digital convenience |
-| Uncertain availability | ✅ Real-time item matching |
-| Cash-only transactions | 💳 Flexible payment options |
-| No order tracking | 🚚 Delivery updates |
-
-## 🔍 Enhanced Features
-
-### 📸 Smart Snap-to-Order
-- **Multi-language OCR**: Supports English, Hindi, and regional languages
-- **Handwriting adaptation**: Learns from corrections to improve accuracy
-- **Image enhancement**: Auto-cropping and contrast adjustment for better OCR
-
-### 🏪 Intelligent Store Matching
-
-graph TD
-    A[User Upload] --> B(OCR Processing)
-    B --> C[Item Extraction]
-    C --> D{Location Services}
-    D --> E[Store Inventory API]
-    E --> F[Match Scoring]
-    F --> G[Top 3 Recommendations]
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Happy Coding!** 🚀
